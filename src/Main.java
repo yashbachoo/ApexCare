@@ -12,13 +12,13 @@ public class Main {
         // Top Navbar
         JPanel redPanel = new JPanel();
         redPanel.setBackground(new Color(0,116,122));
-        redPanel.setPreferredSize(new Dimension(800,50));
+        redPanel.setPreferredSize(new Dimension(800,70));
         redPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 10));
 
         // Left Sidebar
         JPanel bluePanel = new JPanel();
         bluePanel.setBackground(Color.BLUE);
-        bluePanel.setPreferredSize(new Dimension(200,450));
+        bluePanel.setPreferredSize(new Dimension(250,430));
 
         // Center panel with CardLayout
         JPanel mainPanel = new JPanel(new CardLayout());
