@@ -9,11 +9,13 @@ public class Main {
         frame.setSize(800, 500);
         frame.setLayout(new BorderLayout());
 
+
         // Top Navbar
         JPanel redPanel = new JPanel();
         redPanel.setBackground(new Color(0,116,122));
         redPanel.setPreferredSize(new Dimension(800,50));
         redPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 10));
+
 
         // Left Sidebar
         JPanel bluePanel = new JPanel();
@@ -24,9 +26,23 @@ public class Main {
         JPanel mainPanel = new JPanel(new CardLayout());
         CardLayout cardLayout = (CardLayout) mainPanel.getLayout();
 
+        // Connect to database
+        Database db = null;
+        try {
+            db = new Database();
+        } catch(Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Database connection failed!", "Error", JOptionPane.ERROR_MESSAGE);
+            System.exit(1);
+        }
+
         // Add Login Page first
-        LoginPage loginPage = new LoginPage(cardLayout, mainPanel);
+        LoginPage loginPage = new LoginPage(cardLayout, mainPanel, db);
         mainPanel.add(loginPage, "Login");
+
+        //Add Signup page
+        SignupPage signupPage = new SignupPage(cardLayout, mainPanel, db);
+        mainPanel.add(signupPage, "Signup");
 
         // Create Dashboard panel (wrap your buttons and pages here)
         JPanel dashboardPanel = new JPanel(new BorderLayout());
@@ -51,7 +67,7 @@ public class Main {
         dashboardPanel.add(dashboardCenter, BorderLayout.CENTER);
 
         // Buttons
-        String[] buttonNames = {"Administration", "Doctors", "Pharmacy", "Maintenance"};
+        String[] buttonNames = {"Administration", "Doctors", "Pharmacy", "Maintenance", };
         JButton[] buttons = new JButton[buttonNames.length];
 
         for (int i = 0; i < buttonNames.length; i++) {
