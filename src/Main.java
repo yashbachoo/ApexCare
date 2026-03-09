@@ -3,24 +3,66 @@ import java.awt.*;
 import javax.swing.border.EmptyBorder;
 
 public class Main {
+
     public static void main(String[] args) {
+        ImageIcon appIcon = new ImageIcon("buttonIcons/Apexemblem.png");
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 500);
+        frame.setTitle("Apex Care");
+        frame.setIconImage(appIcon.getImage());
         frame.setLayout(new BorderLayout());
 
 
         // Top Navbar
         JPanel redPanel = new JPanel();
         redPanel.setBackground(new Color(0,116,122));
-        redPanel.setPreferredSize(new Dimension(800,50));
+        redPanel.setPreferredSize(new Dimension(800,70));
         redPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 10));
 
 
         // Left Sidebar
+        JLabel logoContainer = new JLabel();
         JPanel bluePanel = new JPanel();
-        bluePanel.setBackground(Color.BLUE);
-        bluePanel.setPreferredSize(new Dimension(200,450));
+        bluePanel.setBackground(new Color(0, 116, 122, 208));
+        bluePanel.setPreferredSize(new Dimension(250,430));
+        bluePanel.setLayout(null);
+        logoContainer.setBounds(0,0,250,110);
+        logoContainer.setBackground(new Color(255,255,255));
+        logoContainer.setOpaque(true);
+        logoContainer.setIcon(IconUtils.resizeIcon(250,110,"buttonIcons/ApexCareLogo.png"));
+
+       // initializing buttons on the left sidebar
+        Color sideButtonscolor = new Color(0, 116, 122);
+        JButton addDoctor = new JButton("Add Doctors");
+        addDoctor.setBounds(0,130,250,80);
+        addDoctor.setBackground(sideButtonscolor);
+        addDoctor.setForeground(Color.WHITE);
+        addDoctor.setFocusPainted(false);
+        addDoctor.setRolloverEnabled(false);
+
+        JButton addPatient = new JButton("Add Patients ");
+        addPatient.setBounds(0,221,250,80);
+        addPatient.setBackground(sideButtonscolor);
+        addPatient.setForeground(Color.WHITE);
+        addPatient.setFocusPainted(false);
+        addPatient.setRolloverEnabled(false);
+
+        JButton logout = new JButton("Log out");
+        logout.setBounds(60,750,130,50);
+        logout.setFocusPainted(false);
+        logout.setRolloverEnabled(false);
+        logout.setBackground(new Color(175, 225, 194));
+
+
+        bluePanel.add(logoContainer);
+        bluePanel.add(addDoctor);
+        bluePanel.add(addPatient);
+        bluePanel.add(logout);
+        bluePanel.add(logout);
+// ########################################################################
+
+
 
         // Center panel with CardLayout
         JPanel mainPanel = new JPanel(new CardLayout());
@@ -102,6 +144,7 @@ public class Main {
         cardLayout.show(mainPanel, "Login");
 
         frame.add(mainPanel, BorderLayout.CENTER);
+
         frame.setVisible(true);
     }
 }
