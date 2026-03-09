@@ -90,23 +90,49 @@ public class SignupPage extends JPanel {
             String email = emailField.getText();
             String password = new String(passwordField.getPassword());
 
+            // Email validation
+            String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+            if (!email.matches(emailRegex)) {
+                JOptionPane.showMessageDialog(this, "Invalid email format!", "Validation Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Password validation
+            String passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$";
+            if (!password.matches(passwordRegex)) {
+                JOptionPane.showMessageDialog(this,
+                        "Password must contain:\n- At least 8 characters\n- 1 uppercase letter\n- 1 lowercase letter\n- 1 number",
+                        "Validation Error",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
             try {
                 String query = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
                 PreparedStatement stmt = db.getConnection().prepareStatement(query);
                 stmt.setString(1, username);
                 stmt.setString(2, email);
                 stmt.setString(3, password);
+
                 int rows = stmt.executeUpdate();
 
-                if(rows > 0) {
-                    JOptionPane.showMessageDialog(this, "Account created successfully! Please login.", "Success", JOptionPane.INFORMATION_MESSAGE);
-                    cardLayout.show(mainPanel, "Login"); // go back to login page
+                if (rows > 0) {
+                    JOptionPane.showMessageDialog(this,
+                            "Account created successfully! Please login.",
+                            "Success",
+                            JOptionPane.INFORMATION_MESSAGE);
+
+                    cardLayout.show(mainPanel, "Login");
                 }
 
                 stmt.close();
-            } catch(SQLException ex) {
+
+            } catch (SQLException ex) {
                 ex.printStackTrace();
-                JOptionPane.showMessageDialog(this, "Error creating account!", "Signup Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this,
+                        "Error creating account!",
+                        "Signup Error",
+                        JOptionPane.ERROR_MESSAGE);
             }
         });
     }

@@ -17,7 +17,7 @@ public class Main {
         // Top Navbar
         JPanel redPanel = new JPanel();
         redPanel.setBackground(new Color(0,116,122));
-        redPanel.setPreferredSize(new Dimension(800,70));
+        redPanel.setPreferredSize(new Dimension(800,60));
         redPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 10));
 
 
@@ -33,20 +33,26 @@ public class Main {
         logoContainer.setIcon(IconUtils.resizeIcon(250,110,"buttonIcons/ApexCareLogo.png"));
 
        // initializing buttons on the left sidebar
-        Color sideButtonscolor = new Color(0, 116, 122);
+//        Color sideButtonscolor = new Color(0, 116, 122);
         JButton addDoctor = new JButton("Add Doctors");
-        addDoctor.setBounds(0,130,250,80);
-        addDoctor.setBackground(sideButtonscolor);
-        addDoctor.setForeground(Color.WHITE);
+        addDoctor.setBounds(0,130,250,60);
+//        addDoctor.setBackground(Color.BLACK);
+        addDoctor.setOpaque(true);
+//        addDoctor.setForeground(Color.WHITE);
         addDoctor.setFocusPainted(false);
         addDoctor.setRolloverEnabled(false);
 
+
         JButton addPatient = new JButton("Add Patients ");
-        addPatient.setBounds(0,221,250,80);
-        addPatient.setBackground(sideButtonscolor);
-        addPatient.setForeground(Color.WHITE);
+        addPatient.setBounds(0,221,250,60);
+//        addPatient.setBackground(new Color(0, 116, 122));
+        addPatient.setOpaque(true);
+//        addPatient.setForeground(Color.WHITE);
         addPatient.setFocusPainted(false);
         addPatient.setRolloverEnabled(false);
+
+
+
 
         JButton logout = new JButton("Log out");
         logout.setBounds(60,750,130,50);
@@ -58,7 +64,6 @@ public class Main {
         bluePanel.add(logoContainer);
         bluePanel.add(addDoctor);
         bluePanel.add(addPatient);
-        bluePanel.add(logout);
         bluePanel.add(logout);
 // ########################################################################
 
@@ -100,6 +105,7 @@ public class Main {
         DoctorsPage doctorsPage = new DoctorsPage();
         PharmacyPage pharmacyPage = new PharmacyPage();
         MaintenancePage maintenancePage = new MaintenancePage();
+        AddDoctorPage addDoctorPage = new AddDoctorPage();
 
         //Dashboard center panel with pages
         DoctorProfiles doctorProfilesPage = new DoctorProfiles();
@@ -110,14 +116,13 @@ public class Main {
         Staff StaffPage = new Staff();
 
 
-
-
-
         dashboardCenter.add(adminPage, "Administration");
         dashboardCenter.add(doctorsPage, "Doctors");
         dashboardCenter.add(pharmacyPage, "Pharmacy");
         dashboardCenter.add(maintenancePage, "Maintenance");
+        dashboardCenter.add(addDoctorPage, "AddDoctorPage");
 
+        //
         dashboardCenter.add(doctorProfilesPage, "DoctorProfiles");
         dashboardCenter.add(patientProfilesPage, "PatientProfiles");
         dashboardCenter.add(AppointmentsPage, "Appointments");
@@ -127,13 +132,10 @@ public class Main {
 
 
 
-
-
-
         dashboardPanel.add(dashboardCenter, BorderLayout.CENTER);
 
         // Buttons
-        String[] buttonNames = {"Administration", "Doctors", "Pharmacy", "Maintenance", };
+        String[] buttonNames = {"Administration", "Doctors", "Pharmacy", "Maintenance", "AddDoctor"};
         JButton[] buttons = new JButton[buttonNames.length];
 
         for (int i = 0; i < buttonNames.length; i++) {
@@ -161,6 +163,13 @@ public class Main {
 
             redPanel.add(btn);
         }
+
+
+        //Action to direct buttons to another page
+        addDoctor.addActionListener(e -> {
+            CardLayout cl = (CardLayout) dashboardCenter.getLayout();
+            cl.show(dashboardCenter, "AddDoctorPage");
+        });
 
         mainPanel.add(dashboardPanel, "Dashboard");
 
