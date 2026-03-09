@@ -86,6 +86,7 @@ public class Main {
         cardLayout.show(mainPanel, "Login");
 
         frame.add(mainPanel, BorderLayout.CENTER);
+
         frame.setVisible(true);
     }
 }
