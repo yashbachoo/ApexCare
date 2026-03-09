@@ -8,11 +8,26 @@ import java.util.Objects;
 public class AdministrationPage extends JPanel {
     JButton doctorButton;
     public JButton getDoctorButton(){return doctorButton;}
+
     JButton patientButton;
+
+    public JButton getPatientButton() {return patientButton;}
+
     JButton appointmentButton;
+
+    public JButton getAppointmentButton() {return appointmentButton;}
+
     JButton ambulancesButton;
+
+    public JButton getAmbulancesButton() {return ambulancesButton;}
+
     JButton admissionButton;
+
+    public JButton getAdmissionButton() {return admissionButton;}
+
     JButton staffButton;
+
+    public JButton getStaffButton() {return staffButton;}
 
     public AdministrationPage() {
 
