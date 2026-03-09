@@ -93,18 +93,42 @@ public class Main {
         dashboardPanel.add(redPanel, BorderLayout.NORTH);
         dashboardPanel.add(bluePanel, BorderLayout.WEST);
 
-        // Dashboard center panel with pages
+        // Dashboard top panel with pages
         JPanel dashboardCenter = new JPanel(new CardLayout());
 
-        AdministrationPage adminPage = new AdministrationPage();
+        AdministrationPage adminPage = new AdministrationPage(dashboardCenter);
         DoctorsPage doctorsPage = new DoctorsPage();
         PharmacyPage pharmacyPage = new PharmacyPage();
         MaintenancePage maintenancePage = new MaintenancePage();
+
+        //Dashboard center panel with pages
+        DoctorProfiles doctorProfilesPage = new DoctorProfiles();
+        PatientProfiles patientProfilesPage = new PatientProfiles();
+        Appointments AppointmentsPage = new Appointments();
+        Ambulances AmbulancesPage = new Ambulances();
+        Admissions AdmissionsPage = new Admissions();
+        Staff StaffPage = new Staff();
+
+
+
+
 
         dashboardCenter.add(adminPage, "Administration");
         dashboardCenter.add(doctorsPage, "Doctors");
         dashboardCenter.add(pharmacyPage, "Pharmacy");
         dashboardCenter.add(maintenancePage, "Maintenance");
+
+        dashboardCenter.add(doctorProfilesPage, "DoctorProfiles");
+        dashboardCenter.add(patientProfilesPage, "PatientProfiles");
+        dashboardCenter.add(AppointmentsPage, "Appointments");
+        dashboardCenter.add(AmbulancesPage, "Ambulances");
+        dashboardCenter.add(AdmissionsPage, "Admissions");
+        dashboardCenter.add(StaffPage, "Staff");
+
+
+
+
+
 
         dashboardPanel.add(dashboardCenter, BorderLayout.CENTER);
 
@@ -146,5 +170,6 @@ public class Main {
         frame.add(mainPanel, BorderLayout.CENTER);
 
         frame.setVisible(true);
+
     }
 }
