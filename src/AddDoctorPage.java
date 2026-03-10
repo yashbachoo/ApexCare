@@ -57,6 +57,8 @@ public class AddDoctorPage extends JPanel {
         genderLabel.setBounds(50,250,150,30);
         panel.add(genderLabel);
 
+        //###########################################################################################################
+        //Dropdown for gender
         String[] gender = {"Male","Female","Other"};
         genderBox = new JComboBox<>(gender);
         genderBox.setBounds(200,250,350,35);
@@ -161,7 +163,6 @@ public class AddDoctorPage extends JPanel {
     // DATABASE INSERT METHOD
 
     private void addDoctorToDatabase() {
-
         try {
 
             String url = "jdbc:mysql://localhost:3306/ApexCare";

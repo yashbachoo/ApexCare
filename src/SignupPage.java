@@ -84,7 +84,7 @@ public class SignupPage extends JPanel {
 
         add(formPanel); // add formPanel to right column
 
-        // --- Signup Action ---
+        // --- Signup Action Validation ---
         signupButton.addActionListener(e -> {
             String username = usernameField.getText();
             String email = emailField.getText();
