@@ -12,7 +12,7 @@ public class Database {
 
             String url = "jdbc:mysql://localhost:3306/ApexCare";
             String user = "root";
-            String password = "";
+            String password = "1231202ya";
 
             conn = DriverManager.getConnection(url, user, password);
 

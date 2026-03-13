@@ -3,12 +3,16 @@ import java.awt.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.util.Date;
+
 
 public class AddDoctorPage extends JPanel {
 
     JTextField nameField, dobField, specializationField, qualificationField,
             experienceField, departmentField, contactField, emailField,
             feeField, availabilityField, addressField;
+
+    JSpinner dobSpinner;
 
     JComboBox<String> genderBox;
     JTextArea notesArea;
@@ -37,6 +41,7 @@ public class AddDoctorPage extends JPanel {
 
         // LEFT SIDE
 
+        //Name
         JLabel nameLabel = new JLabel("Full Name:");
         nameLabel.setBounds(50,150,150,30);
         panel.add(nameLabel);
@@ -45,25 +50,54 @@ public class AddDoctorPage extends JPanel {
         nameField.setBounds(200,150,350,35);
         panel.add(nameField);
 
+        //Date of birth
         JLabel dobLabel = new JLabel("Date of Birth:");
         dobLabel.setBounds(50,200,150,30);
         panel.add(dobLabel);
 
-        dobField = new JTextField();
-        dobField.setBounds(200,200,350,35);
-        panel.add(dobField);
 
+
+// In constructor
+        dobSpinner = new JSpinner(new SpinnerDateModel());
+        JSpinner.DateEditor dobEditor = new JSpinner.DateEditor(dobSpinner, "yyyy-MM-dd");
+        dobSpinner.setEditor(dobEditor);
+        dobSpinner.setBounds(200,200,350,35);
+        panel.add(dobSpinner);
+
+
+
+//        dobField = new JTextField();
+//        dobField.setBounds(200,200,350,35);
+//        panel.add(dobField);
+//
+//
+//        // New Date field
+//// Create a date spinner
+//        SpinnerDateModel model = new SpinnerDateModel();
+//        JSpinner dateSpinner = new JSpinner(model);
+//        JSpinner.DateEditor editor = new JSpinner.DateEditor(dateSpinner, "yyyy-MM-dd");
+//        dateSpinner.setEditor(editor);
+//
+//// Add to panel
+//        panel.add(new JLabel("Appointment Date:"));
+//        panel.add(dateSpinner);
+
+
+
+        //###########################################################################################################
+        //Dropdown for gender
+
+        //Gender
         JLabel genderLabel = new JLabel("Gender:");
         genderLabel.setBounds(50,250,150,30);
         panel.add(genderLabel);
 
-        //###########################################################################################################
-        //Dropdown for gender
         String[] gender = {"Male","Female","Other"};
         genderBox = new JComboBox<>(gender);
         genderBox.setBounds(200,250,350,35);
         panel.add(genderBox);
 
+        //Specialization
         JLabel specializationLabel = new JLabel("Specialization:");
         specializationLabel.setBounds(50,300,150,30);
         panel.add(specializationLabel);
@@ -72,6 +106,7 @@ public class AddDoctorPage extends JPanel {
         specializationField.setBounds(200,300,350,35);
         panel.add(specializationField);
 
+        //Qualification
         JLabel qualificationLabel = new JLabel("Qualification:");
         qualificationLabel.setBounds(50,350,150,30);
         panel.add(qualificationLabel);
@@ -162,9 +197,8 @@ public class AddDoctorPage extends JPanel {
 
     // DATABASE INSERT METHOD
 
-    private void addDoctorToDatabase() {
+    private void addDoctorToDatabase(){
         try {
-
             String url = "jdbc:mysql://localhost:3306/ApexCare";
             String user = "root";
             String password = "1231202ya";
@@ -175,8 +209,15 @@ public class AddDoctorPage extends JPanel {
 
             PreparedStatement ps = con.prepareStatement(sql);
 
+            // Convert the spinner value here
+            Date dobDate = (Date) dobSpinner.getValue();        // java.util.Date from spinner
+            java.sql.Date sqlDob = new java.sql.Date(dobDate.getTime()); // convert to java.sql.Date
+
+            ps.setDate(2, sqlDob);  // save DOB in database
+
+
             ps.setString(1,nameField.getText());
-            ps.setString(2,dobField.getText());
+            ps.setDate(2, sqlDob); // <--- Use java.sql.Date here
             ps.setString(3,genderBox.getSelectedItem().toString());
             ps.setString(4,specializationField.getText());
             ps.setString(5,qualificationField.getText());

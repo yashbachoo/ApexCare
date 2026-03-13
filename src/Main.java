@@ -164,7 +164,6 @@ public class Main {
             redPanel.add(btn);
         }
 
-
         //Action to direct buttons to another page
         addDoctor.addActionListener(e -> {
             CardLayout cl = (CardLayout) dashboardCenter.getLayout();
