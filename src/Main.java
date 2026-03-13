@@ -135,7 +135,7 @@ public class Main {
         dashboardPanel.add(dashboardCenter, BorderLayout.CENTER);
 
         // Buttons
-        String[] buttonNames = {"Administration", "Doctors", "Pharmacy", "Maintenance", "AddDoctor"};
+        String[] buttonNames = {"Administration", "Doctors", "Pharmacy", "Maintenance"};
         JButton[] buttons = new JButton[buttonNames.length];
 
         for (int i = 0; i < buttonNames.length; i++) {

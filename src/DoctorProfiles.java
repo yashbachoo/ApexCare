@@ -28,17 +28,12 @@ public class DoctorProfiles extends JPanel {
         this.add(name);
 
         JTextField nameField = new JTextField();
-        nameField.setBounds(250, 70, 120, 30);
+        nameField.setBounds(250, 70, 220, 30);
         this.add(nameField);
 
-        // Surname field shifted further right
-        JLabel surname = new JLabel("surname:");
-        surname.setBounds(380, 70, 70, 30);
-        this.add(surname);
 
-        JTextField surnameField = new JTextField();
-        surnameField.setBounds(450, 70, 120, 30);
-        this.add(surnameField);
+
+
 
         // Speciality combo box
         JLabel speciality = new JLabel("speciality:");
