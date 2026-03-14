@@ -65,25 +65,6 @@ public class AddDoctorPage extends JPanel {
         panel.add(dobSpinner);
 
 
-
-//        dobField = new JTextField();
-//        dobField.setBounds(200,200,350,35);
-//        panel.add(dobField);
-//
-//
-//        // New Date field
-//// Create a date spinner
-//        SpinnerDateModel model = new SpinnerDateModel();
-//        JSpinner dateSpinner = new JSpinner(model);
-//        JSpinner.DateEditor editor = new JSpinner.DateEditor(dateSpinner, "yyyy-MM-dd");
-//        dateSpinner.setEditor(editor);
-//
-//// Add to panel
-//        panel.add(new JLabel("Appointment Date:"));
-//        panel.add(dateSpinner);
-
-
-
         //###########################################################################################################
         //Dropdown for gender
 

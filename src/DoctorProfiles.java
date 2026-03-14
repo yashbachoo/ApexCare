@@ -97,6 +97,7 @@ public class DoctorProfiles extends JPanel {
     }
 
     public void addDoctorRow(String id, String fullName, String specialization, String availability) {
+
         JPanel row = new JPanel(new GridLayout(1,5,10,10));
         row.setMaximumSize(new Dimension(850,50));
         row.setBackground(new Color(240,240,240));
@@ -108,6 +109,11 @@ public class DoctorProfiles extends JPanel {
         row.add(new JLabel(availability));
 
         JButton viewButton = new JButton("View");
+
+        viewButton.addActionListener(e -> {
+            new DoctorDetails(Integer.parseInt(id));
+        });
+
         row.add(viewButton);
 
         container.add(row);
@@ -116,4 +122,5 @@ public class DoctorProfiles extends JPanel {
         container.revalidate();
         container.repaint();
     }
+
 }
