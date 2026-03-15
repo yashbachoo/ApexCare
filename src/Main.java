@@ -8,7 +8,7 @@ public class Main {
         ImageIcon appIcon = new ImageIcon("buttonIcons/Apexemblem.png");
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(800, 500);
+        frame.setSize(1400, 900);
         frame.setTitle("Apex Care");
         frame.setIconImage(appIcon.getImage());
         frame.setLayout(new BorderLayout());
@@ -106,9 +106,10 @@ public class Main {
         PharmacyPage pharmacyPage = new PharmacyPage();
         MaintenancePage maintenancePage = new MaintenancePage();
         AddDoctorPage addDoctorPage = new AddDoctorPage();
+        DoctorDetails doctorDetails = new DoctorDetails(1);
 
         //Dashboard center panel with pages
-        DoctorProfiles doctorProfilesPage = new DoctorProfiles();
+        DoctorProfiles doctorProfilesPage = new DoctorProfiles(dashboardCenter);
         PatientProfiles patientProfilesPage = new PatientProfiles();
         Appointments AppointmentsPage = new Appointments();
         Ambulances AmbulancesPage = new Ambulances();
@@ -121,6 +122,8 @@ public class Main {
         dashboardCenter.add(pharmacyPage, "Pharmacy");
         dashboardCenter.add(maintenancePage, "Maintenance");
         dashboardCenter.add(addDoctorPage, "AddDoctorPage");
+        dashboardCenter.add("doctorDetails", doctorDetails);
+
 
         //
         dashboardCenter.add(doctorProfilesPage, "DoctorProfiles");
