@@ -140,6 +140,7 @@ public class Main {
         // Buttons
         String[] buttonNames = {"Administration", "Doctors", "Pharmacy", "Maintenance", "AddDoctor"};
         JButton[] buttons = new JButton[buttonNames.length];
+        JButton reloadBtn = new JButton("Reload");
 
         for (int i = 0; i < buttonNames.length; i++) {
             String pageName = buttonNames[i];
@@ -166,6 +167,13 @@ public class Main {
 
             redPanel.add(btn);
         }
+
+        reloadBtn.setForeground(Color.WHITE);
+        reloadBtn.setBackground(new Color(0,116,122));
+        reloadBtn.setFocusPainted(false);
+        reloadBtn.setBorder(new EmptyBorder(7, 30, 7, 30));
+        reloadBtn.setOpaque(true);
+
 
         //Action to direct buttons to another page
         addDoctor.addActionListener(e -> {

@@ -299,8 +299,8 @@ public class AddDoctorPage extends JPanel {
             ps.setString(1,nameField.getText());
             ps.setDate(2, sqlDob); // <--- Use java.sql.Date here
             ps.setString(3,genderBox.getSelectedItem().toString());
-            ps.setString(4,specializationField.getText());
-            ps.setString(5,qualificationField.getText());
+            ps.setString(4,SpecializationBox.getSelectedItem().toString());
+            ps.setString(5,qualificationsBox.getSelectedItem().toString());
             ps.setInt(6,Integer.parseInt(experienceField.getText()));
             ps.setString(7,departmentField.getText());
             ps.setString(8,contactField.getText());

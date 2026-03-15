@@ -17,6 +17,11 @@ public class DoctorProfiles extends JPanel {
         pageHeading.setBounds(70, 18, 200, 50);
         this.add(pageHeading);
 
+        JLabel Title = new JLabel("Available Doctors");
+        Title.setFont(new Font("SansSerif", Font.PLAIN, 24));
+        Title.setBounds(870, 70, 250, 40);
+        this.add(Title);
+
         //########## Container that will hold doctor rows ##########
         container = new JPanel();
         container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
@@ -92,14 +97,43 @@ public class DoctorProfiles extends JPanel {
         // Apply filters on click
         searchButton.addActionListener(e -> applyFilters(filterById, nameField, specialityBox));
 
+        //Reload buttons
+        JButton reloadButton = new JButton("Reload");
+        reloadButton.setBounds(710,70,100,30);
+        this.add(reloadButton);
+
+        // Reload data
+        reloadButton.addActionListener(e -> {
+            filterById.setText("");
+            nameField.setText("");
+            specialityBox.setSelectedIndex(0);
+
+            container.removeAll();
+            loadDoctors();
+
+            container.revalidate();
+            container.repaint();
+        });
+
         //########## Load all doctors initially ##########
         loadDoctors();
 
-        //########## Right-side panel for available doctors ##########
+
+
+
+
+
+        //################################################## Right-side panel for available doctors ##################################################
+
+
         JPanel availableDoctorsPanel = new JPanel();
         availableDoctorsPanel.setLayout(new BoxLayout(availableDoctorsPanel, BoxLayout.Y_AXIS));
         availableDoctorsPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
         availableDoctorsPanel.setBackground(Color.WHITE);
+
+
+
+
 
         JScrollPane availableScroll = new JScrollPane(availableDoctorsPanel);
         availableScroll.setBounds(870, 110, 250, 690);
