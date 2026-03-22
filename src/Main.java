@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.EmptyBorder;
 
+
 public class Main {
 
     public static void main(String[] args) {
@@ -43,13 +44,13 @@ public class Main {
         addDoctor.setRolloverEnabled(false);
 
 
-        JButton addPatient = new JButton("Add Patients ");
-        addPatient.setBounds(0,221,250,60);
+        JButton addPatientBtn = new JButton("Add Patients ");
+        addPatientBtn.setBounds(0,221,250,60);
 //        addPatient.setBackground(new Color(0, 116, 122));
-        addPatient.setOpaque(true);
+        addPatientBtn.setOpaque(true);
 //        addPatient.setForeground(Color.WHITE);
-        addPatient.setFocusPainted(false);
-        addPatient.setRolloverEnabled(false);
+        addPatientBtn.setFocusPainted(false);
+        addPatientBtn.setRolloverEnabled(false);
 
 
 
@@ -63,7 +64,7 @@ public class Main {
 
         bluePanel.add(logoContainer);
         bluePanel.add(addDoctor);
-        bluePanel.add(addPatient);
+        bluePanel.add(addPatientBtn);
         bluePanel.add(logout);
 // ########################################################################
 
@@ -106,11 +107,13 @@ public class Main {
         PharmacyPage pharmacyPage = new PharmacyPage();
         MaintenancePage maintenancePage = new MaintenancePage();
         AddDoctorPage addDoctorPage = new AddDoctorPage();
+        AddPatient addPatient = new AddPatient(dashboardCenter);
         DoctorDetails doctorDetails = new DoctorDetails(1);
+        PatientDetails patientDetails = new PatientDetails(1);
 
         //Dashboard center panel with pages
         DoctorProfiles doctorProfilesPage = new DoctorProfiles(dashboardCenter);
-        PatientProfiles patientProfilesPage = new PatientProfiles();
+        PatientProfiles patientProfilesPage = new PatientProfiles(dashboardCenter);
         Appointments AppointmentsPage = new Appointments();
         Ambulances AmbulancesPage = new Ambulances();
         Admissions AdmissionsPage = new Admissions();
@@ -119,13 +122,14 @@ public class Main {
 
         dashboardCenter.add(adminPage, "Administration");
         dashboardCenter.add(doctorsPage, "Doctors");
+        dashboardCenter.add(addPatient, "AddPatient");
         dashboardCenter.add(pharmacyPage, "Pharmacy");
         dashboardCenter.add(maintenancePage, "Maintenance");
         dashboardCenter.add(addDoctorPage, "AddDoctorPage");
-        dashboardCenter.add("doctorDetails", doctorDetails);
 
+        dashboardCenter.add(doctorDetails, "doctorDetails");
+        dashboardCenter.add(patientDetails, "patientDetails");
 
-        //
         dashboardCenter.add(doctorProfilesPage, "DoctorProfiles");
         dashboardCenter.add(patientProfilesPage, "PatientProfiles");
         dashboardCenter.add(AppointmentsPage, "Appointments");
@@ -181,6 +185,12 @@ public class Main {
             cl.show(dashboardCenter, "AddDoctorPage");
         });
 
+        //Action to direct to AddPatient page
+        addPatientBtn.addActionListener(e -> {
+            CardLayout cl = (CardLayout) dashboardCenter.getLayout();
+            cl.show(dashboardCenter, "AddPatient");
+        });
+
         mainPanel.add(dashboardPanel, "Dashboard");
 
         // Show Login page first
@@ -191,4 +201,5 @@ public class Main {
         frame.setVisible(true);
 
     }
+
 }
