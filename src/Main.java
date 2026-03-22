@@ -103,10 +103,13 @@ public class Main {
 
         AdministrationPage adminPage = new AdministrationPage(dashboardCenter);
         DoctorsPage doctorsPage = new DoctorsPage();
-        PharmacyPage pharmacyPage = new PharmacyPage();
+        PharmacyPage pharmacyPage = new PharmacyPage(dashboardCenter);
         MaintenancePage maintenancePage = new MaintenancePage();
         AddDoctorPage addDoctorPage = new AddDoctorPage();
         DoctorDetails doctorDetails = new DoctorDetails(1);
+        PharmacyPurchase pharmacyPurchase = new PharmacyPurchase();
+        PharmacyStocks pharmacyStocks = new PharmacyStocks(dashboardCenter);
+        AddPharmacyStockPage addPharmacyStockPage = new AddPharmacyStockPage();
 
         //Dashboard center panel with pages
         DoctorProfiles doctorProfilesPage = new DoctorProfiles(dashboardCenter);
@@ -123,6 +126,9 @@ public class Main {
         dashboardCenter.add(maintenancePage, "Maintenance");
         dashboardCenter.add(addDoctorPage, "AddDoctorPage");
         dashboardCenter.add("doctorDetails", doctorDetails);
+        dashboardCenter.add(pharmacyPurchase,"PharmacyPurchase");
+        dashboardCenter.add(pharmacyStocks,"PharmacyStocks");
+        dashboardCenter.add(addPharmacyStockPage,"AddPharmacyStockPage");
 
 
         //
