@@ -221,6 +221,7 @@ public class DoctorProfiles extends JPanel {
         row.add(new JLabel(specialization));
         row.add(new JLabel(availability));
 
+
         JButton viewButton = new JButton("View");
         viewButton.addActionListener(e -> {
             DoctorDetails details = new DoctorDetails(Integer.parseInt(id));
