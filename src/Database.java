@@ -10,9 +10,9 @@ public class Database {
             // Load MySQL Driver
 //            Class.forName("com.mysql.cj.jdbc.Driver");
 
-            String url = "jdbc:mysql://localhost:3306/ApexCare?useSSL=false";
+            String url = "jdbc:mysql://localhost:3306/ApexCare";
             String user = "root";
-            String password = "";
+            String password = "Nirave0270#";
 
             conn = DriverManager.getConnection(url, user, password);
 

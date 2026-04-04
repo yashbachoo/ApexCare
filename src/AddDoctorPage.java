@@ -281,7 +281,7 @@ public class AddDoctorPage extends JPanel {
         try {
             String url = "jdbc:mysql://localhost:3306/ApexCare";
             String user = "root";
-            String password = "";
+            String password = "Nirave0270#";
 
             Connection con = DriverManager.getConnection(url,user,password);
 

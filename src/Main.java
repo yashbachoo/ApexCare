@@ -2,8 +2,10 @@ import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.EmptyBorder;
 
-
 public class Main {
+    private static CardLayout mainCardLayout;
+    private static JPanel mainPanel;
+    private static Database db;
 
     public static void main(String[] args) {
         ImageIcon appIcon = new ImageIcon("buttonIcons/Apexemblem.png");
@@ -14,13 +16,11 @@ public class Main {
         frame.setIconImage(appIcon.getImage());
         frame.setLayout(new BorderLayout());
 
-
         // Top Navbar
         JPanel redPanel = new JPanel();
         redPanel.setBackground(new Color(0,116,122));
         redPanel.setPreferredSize(new Dimension(800,60));
         redPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 10));
-
 
         // Left Sidebar
         JLabel logoContainer = new JLabel();
@@ -33,27 +33,18 @@ public class Main {
         logoContainer.setOpaque(true);
         logoContainer.setIcon(IconUtils.resizeIcon(250,110,"buttonIcons/ApexCareLogo.png"));
 
-       // initializing buttons on the left sidebar
-//        Color sideButtonscolor = new Color(0, 116, 122);
+        // Initializing buttons on the left sidebar
         JButton addDoctor = new JButton("Add Doctors");
         addDoctor.setBounds(0,130,250,60);
-//        addDoctor.setBackground(Color.BLACK);
         addDoctor.setOpaque(true);
-//        addDoctor.setForeground(Color.WHITE);
         addDoctor.setFocusPainted(false);
         addDoctor.setRolloverEnabled(false);
 
-
         JButton addPatientBtn = new JButton("Add Patients ");
         addPatientBtn.setBounds(0,221,250,60);
-//        addPatient.setBackground(new Color(0, 116, 122));
         addPatientBtn.setOpaque(true);
-//        addPatient.setForeground(Color.WHITE);
         addPatientBtn.setFocusPainted(false);
         addPatientBtn.setRolloverEnabled(false);
-
-
-
 
         JButton logout = new JButton("Log out");
         logout.setBounds(60,750,130,50);
@@ -61,21 +52,16 @@ public class Main {
         logout.setRolloverEnabled(false);
         logout.setBackground(new Color(175, 225, 194));
 
-
         bluePanel.add(logoContainer);
         bluePanel.add(addDoctor);
         bluePanel.add(addPatientBtn);
         bluePanel.add(logout);
-// ########################################################################
-
-
 
         // Center panel with CardLayout
-        JPanel mainPanel = new JPanel(new CardLayout());
-        CardLayout cardLayout = (CardLayout) mainPanel.getLayout();
+        mainPanel = new JPanel(new CardLayout());
+        mainCardLayout = (CardLayout) mainPanel.getLayout();
 
         // Connect to database
-        Database db = null;
         try {
             db = new Database();
         } catch(Exception ex) {
@@ -83,14 +69,6 @@ public class Main {
             JOptionPane.showMessageDialog(null, "Database connection failed!", "Error", JOptionPane.ERROR_MESSAGE);
             System.exit(1);
         }
-
-        // Add Login Page first
-        LoginPage loginPage = new LoginPage(cardLayout, mainPanel, db);
-        mainPanel.add(loginPage, "Login");
-
-        //Add Signup page
-        SignupPage signupPage = new SignupPage(cardLayout, mainPanel, db);
-        mainPanel.add(signupPage, "Signup");
 
         // Create Dashboard panel (wrap your buttons and pages here)
         JPanel dashboardPanel = new JPanel(new BorderLayout());
@@ -114,14 +92,13 @@ public class Main {
         AddPharmacyStockPage addPharmacyStockPage = new AddPharmacyStockPage();
         PatientDetails patientDetails = new PatientDetails(1);
 
-        //Dashboard center panel with pages
+        // Dashboard center panel with pages
         DoctorProfiles doctorProfilesPage = new DoctorProfiles(dashboardCenter);
         PatientProfiles patientProfilesPage = new PatientProfiles(dashboardCenter);
         Appointments AppointmentsPage = new Appointments();
         Ambulances AmbulancesPage = new Ambulances();
         Admissions AdmissionsPage = new Admissions();
         Staff StaffPage = new Staff();
-
 
         dashboardCenter.add(adminPage, "Administration");
         dashboardCenter.add(doctorsPage, "Doctors");
@@ -133,18 +110,14 @@ public class Main {
         dashboardCenter.add(pharmacyPurchase,"PharmacyPurchase");
         dashboardCenter.add(pharmacyStocks,"PharmacyStocks");
         dashboardCenter.add(addPharmacyStockPage,"AddPharmacyStockPage");
-
         dashboardCenter.add(doctorDetails, "doctorDetails");
         dashboardCenter.add(patientDetails, "patientDetails");
-
         dashboardCenter.add(doctorProfilesPage, "DoctorProfiles");
         dashboardCenter.add(patientProfilesPage, "PatientProfiles");
         dashboardCenter.add(AppointmentsPage, "Appointments");
         dashboardCenter.add(AmbulancesPage, "Ambulances");
         dashboardCenter.add(AdmissionsPage, "Admissions");
         dashboardCenter.add(StaffPage, "Staff");
-
-
 
         dashboardPanel.add(dashboardCenter, BorderLayout.CENTER);
 
@@ -185,28 +158,59 @@ public class Main {
         reloadBtn.setBorder(new EmptyBorder(7, 30, 7, 30));
         reloadBtn.setOpaque(true);
 
-
-        //Action to direct buttons to another page
+        // Action to direct buttons to another page
         addDoctor.addActionListener(e -> {
             CardLayout cl = (CardLayout) dashboardCenter.getLayout();
             cl.show(dashboardCenter, "AddDoctorPage");
         });
 
-        //Action to direct to AddPatient page
+        // Action to direct to AddPatient page
         addPatientBtn.addActionListener(e -> {
             CardLayout cl = (CardLayout) dashboardCenter.getLayout();
             cl.show(dashboardCenter, "AddPatient");
         });
 
+        // LOGOUT BUTTON ACTION - THIS IS THE KEY PART
+        logout.addActionListener(e -> {
+            // Show confirmation dialog
+            int confirm = JOptionPane.showConfirmDialog(frame,
+                    "Are you sure you want to logout?",
+                    "Logout Confirmation",
+                    JOptionPane.YES_NO_OPTION);
+
+            if (confirm == JOptionPane.YES_OPTION) {
+                // Clear any user session data if you have it
+                // For example: UserSession.clearSession();
+
+                // Switch back to login page
+                mainCardLayout.show(mainPanel, "Login");
+
+                // Optional: Reset login page fields if needed
+                // You might want to add a method to clear fields in LoginPage
+
+                // Show success message
+                JOptionPane.showMessageDialog(frame,
+                        "You have been logged out successfully.",
+                        "Logged Out",
+                        JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+
+        // Add Login Page
+        LoginPage loginPage = new LoginPage(mainCardLayout, mainPanel, db);
+        mainPanel.add(loginPage, "Login");
+
+        // Add Signup page
+        SignupPage signupPage = new SignupPage(mainCardLayout, mainPanel, db);
+        mainPanel.add(signupPage, "Signup");
+
+        // Add Dashboard
         mainPanel.add(dashboardPanel, "Dashboard");
 
         // Show Login page first
-        cardLayout.show(mainPanel, "Login");
+        mainCardLayout.show(mainPanel, "Login");
 
         frame.add(mainPanel, BorderLayout.CENTER);
-
         frame.setVisible(true);
-
     }
-
 }
