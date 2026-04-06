@@ -36,7 +36,7 @@ public class Admissions extends JPanel {
     // Database connection parameters
     private static final String DB_URL = "jdbc:mysql://localhost:3306/hospital_db";
     private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "password";
+    private static final String DB_PASSWORD = "Nirave0270#";
 
     private CardLayout cardLayout;
     private JPanel mainContainer;
